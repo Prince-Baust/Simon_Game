@@ -23,29 +23,36 @@ $(".btn").on("click", function () {
 });
 
 
+//User pattern & Game pattern checker
+function checkAnswer(currentLevel) {
+    if (userClickedPattern[currentLevel] === gamePattern[currentLevel]){
+        console.log("success");
+        if (userClickedPattern.length === gamePattern.length){
+            setTimeout(function () {
+                nextSequence();
+            }, 1000);
+        }
+    }else
+        console.log("wrong");
+}
 
 
-
-// Random Number Generator Function
+// Game Sequence Generator
 function nextSequence() {
+
+    userClickedPattern = [];
+
+
     level++;
     $("h1").text("Level " + level);
     var randomNumber = Math.floor(Math.random()*4);
     var randomChosenColor = buttonColors[randomNumber];
     gamePattern.push(randomChosenColor);
 
+    //Game pattern showing using animation
     $("#" + randomChosenColor).fadeOut(100).fadeIn(100);
     playSound(randomChosenColor);
 }
-
-
-function checkAnswer(currentLevel) {
-    if (userClickedPattern[currentLevel] === gamePattern[currentLevel])
-        console.log("success");
-    else
-        console.log("wrong");
-}
-
 
 
 
@@ -53,7 +60,7 @@ function playSound(name) {
     var audio = new Audio("sounds/" + name + ".mp3");
     audio.play();
 }
-
+//Animation to play when clicked a button
 function animatePress(currentColor) {
     $("#" + currentColor).addClass("pressed");
     setTimeout(function () {
