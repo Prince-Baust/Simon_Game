@@ -17,10 +17,9 @@ $(".btn").on("click", function () {
 
     var userChosenColor = $(this).attr("id");
     userClickedPattern.push(userChosenColor);
-
     playSound(userChosenColor);
-
     animatePress(userChosenColor);
+    checkAnswer(userClickedPattern.length-1);
 });
 
 
@@ -40,7 +39,12 @@ function nextSequence() {
 }
 
 
-
+function checkAnswer(currentLevel) {
+    if (userClickedPattern[currentLevel] === gamePattern[currentLevel])
+        console.log("success");
+    else
+        console.log("wrong");
+}
 
 
 
