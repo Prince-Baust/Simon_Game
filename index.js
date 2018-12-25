@@ -5,7 +5,7 @@ var gamePattern = [];
 var userClickedPattern = [];
 var level = 0;
 
-$(document).on("keypress", function (e) {
+$(document).on("keypress", function () {
     if (level === 0)
         nextSequence();
 })
@@ -32,8 +32,15 @@ function checkAnswer(currentLevel) {
                 nextSequence();
             }, 1000);
         }
-    }else
-        console.log("wrong");
+    }else{
+        var audio = new Audio("sounds/wrong.mp3");
+        audio.play();
+        $(document.body).addClass("game-over");
+        setTimeout(function () {
+            $(document.body).removeClass("game-over");
+        }, 200);
+    }
+
 }
 
 
